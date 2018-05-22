@@ -1,0 +1,40 @@
+<h1><a href="/">Home</a></h1>
+
+<form id="addHelpful" action="/helpful" method="post">
+    User Name: <select name="user" id="user-selector" required><br>
+        {{#each user}}
+        <option value="{{uid}}">{{fname}} {{lname}}</option>
+        {{/each}}
+	</select><br>
+    Review: <select name="review" id="review-selector" required><br>
+		{{#each review}}
+		<option value="{{rid}}">{{title}} by {{fname}} {{lname}}</option>
+		{{/each}}
+    </select><br />
+    <input type="submit" value="Submit">
+</form>
+
+<h3>Users Marked These Reviews Helpful:</h3>
+<table>
+    <thead>
+    <th>User First</th>
+    <th>User Last</th>
+    <th>Review Title</th>
+	<th>Reviewer First</th>
+	<th>Reviewer Last</th>
+    </thead>
+    <tbody>
+        {{#each helpful}}
+        <tr>
+            <td>{{fname}}</td>
+            <td>{{lname}}</td>
+            <td>{{title}}</td>
+			<td>{{rfname}}</td>
+			<td>{{rlname}}</td>
+			<td><button onclick="deleteHelpful({{uid}}, {{rid}})">Delete</button></td>
+            <td><a href="/helpful/{{uid}}/{{rid}}">Update</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+

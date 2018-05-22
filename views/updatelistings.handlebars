@@ -1,0 +1,20 @@
+﻿
+
+<h1><a href="/">Home</a></h1>
+<h1>Update {{listing.listing_title}}:</h1>
+<form id="update-listing" action="/listings" method="post">
+    Listing name: <input type="text" name="fname"><br>
+    Amount: <input type="number" min="0" name="amount"><br>
+    Price: <input type="number" step=".01" min="0" name="price"><br>
+    Dairy Free:
+    <input type="radio" name="dairy_free" value="No" checked>No
+    <input type="radio" name="dairy_free" value="Yes">Yes <br />
+    Frozen:
+    <input type="radio" name="frozen" value="No" checked>No
+    <input type="radio" name="frozen" value="Yes">Yes <br />
+    Start date: <input type="date" name="date_start"><br>
+    End date: <input type="date" name="date_end"><br>
+    
+</form>
+<button onclick="updateListing({{listing.id}})">Update</button>
+

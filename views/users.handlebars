@@ -1,0 +1,46 @@
+﻿<h1><a href="/">Home</a></h1>
+<h3>Add New User:</h3>
+<form id="addUser" action="/user" method="post">
+    First Name: <input type="text" name="fname" required><br>
+    Last Name: <input type="text" name="lname" required><br>
+    Email: <input type="email" name="email" required><br>
+    Address Line 1: <input type="text" name="add_line1" required><br>
+    Address Line 2: <input type="text" name="add_line2"><br>
+    City: <input type="text" name="city" required><br>
+    State (e.g. CA): <input type="text" name="add_state" required><br>
+    Zip Code: <input type="number" name="zip" required><br>
+    <input type="submit" value="Submit">
+</form>
+<h3>Current Users:</h3>
+<table id="table">
+  <thead>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email Address</th>
+    <th>Address Line 1</th>
+    <th>Address Line 2</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Zip Code</th>
+    <th>Reviews Written</th>
+    <th>Shop Name</th>
+  </thead>
+  <tbody>
+      {{#each user}}
+      <tr>
+          <td>{{fname}}</td>
+          <td>{{lname}}</td>
+          <td>{{email}}</td>
+          <td>{{add_line1}}</td>
+          <td>{{add_line2}}</td>
+          <td>{{city}}</td>
+          <td>{{add_state}}</td>
+          <td>{{zip}}</td>
+          <td>{{num_reviews}}</td>
+          <td>{{shop_name}}</td>
+          <td><button onclick="deleteUser({{uid}})">Delete</button></td>
+          <td><a href="/user/{{uid}}">Update</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
