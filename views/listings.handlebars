@@ -5,14 +5,14 @@
     Amount (oz): <input type="number" step=".1" min="0" name="amount" required><br>
     Price (USD): <input type="number" step=".01" min="0" name="price" required><br>
     Dairy Free:
-    <input type="radio" name="dairy_free" value="TRUE">Yes 
-	<input type="radio" name="dairy_free" value="FALSE" checked>No<br />
+    <input type="radio" name="dairy_free" value=TRUE>Yes 
+	<input type="radio" name="dairy_free" value=FALSE checked>No<br />
     Frozen:
-    <input type="radio" name="frozen" value="TRUE">Yes 
-	<input type="radio" name="frozen" value="FALSE" checked>No<br />
+    <input type="radio" name="frozen" value=TRUE>Yes 
+	<input type="radio" name="frozen" value=FALSE checked>No<br />
     Start date: <input type="date" name="date_start"><br>
     End date: <input type="date" name="date_end"><br>
-    Shop name: <select name="merchFK" id="shop-selector" required>
+    Shop Name: <select name="merchFK" id="shop-selector" required>
         {{#each merchant}}
         <option value="{{mid}}">{{shop_name}}</option>
         {{/each}}
@@ -22,10 +22,12 @@
 
 <h3>Filter Listings:</h3>
 <form id="filterListings" action="/listing" method="get">
-    Price Less Than or Equal To: <input type="number" step=".01" min="0" name="amount"><br>
-    Price Greater Than or Equal To: <input type="number" step=".01" min="0" name="amount"><br>
-    <input type="submit" value="Submit">
-
+    Shop Name: <select name="mid" id="shop-filter" required>
+        {{#each merchant}}
+        <option value="{{mid}}">{{shop_name}}</option>
+        {{/each}}
+    </select><br />
+	<input type="submit" value="Submit">
 </form>
 
 <h3>Current Listings:</h3>

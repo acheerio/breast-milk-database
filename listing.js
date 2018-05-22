@@ -4,10 +4,21 @@ module.exports = function () {
 		
 	/*Display all listings. Requires web based javascript to delete listings with AJAX*/
 
-	function getListings(res, mysql, context, complete) {
-	mysql.pool.query('SELECT lid, listing_title, shop_name, amount, price, price_per, dairy_free, frozen, '
-        + 'date_start, date_end, post_time, active FROM `listing`'
-		+ ' INNER JOIN `merchant` ON merchFK = mid',
+	function getListings(res, mysql, context, merch_id, complete) {
+		var myquery;
+		if (merch_id == null)
+		{
+			myquery = 'SELECT lid, listing_title, shop_name, amount, price, price_per, dairy_free, frozen, '
+		+ 'date_start, date_end, post_time, active FROM `listing`'
+		+ ' INNER JOIN `merchant` ON merchFK = mid';
+		}
+		else
+		{
+			myquery = 'SELECT lid, listing_title, shop_name, amount, price, price_per, dairy_free, frozen, '
+		+ 'date_start, date_end, post_time, active FROM `listing`'
+		+ ' INNER JOIN `merchant` ON merchFK = mid WHERE mid = ' + mid;
+		}
+		mysql.pool.query(myquery,
 		function (err, results, fields) {
 			if (err) {
 				res.write(JSON.stringify(err));
@@ -48,11 +59,13 @@ module.exports = function () {
 	
     router.get('/', function (req, res) {
         var callbackCount = 0;
+		var mid = req.body.mid;
+		console.log('mid = ' + mid);
         var context = {};
         context.jsscripts = ["deletelisting.js"];
         var mysql = req.app.get('mysql');
         getMerchants(res, mysql, context, complete);
-		getListings(res, mysql, context, complete);
+		getListings(res, mysql, context, mid, complete);
         function complete() {
             callbackCount++;
             if (callbackCount >= 2) {
@@ -67,7 +80,7 @@ module.exports = function () {
         var context = {};
         context.jsscripts = ["../updatelisting.js"];
         var mysql = req.app.get('mysql');
-        getListing(res, mysql, context, req.params.lid, complete);
+        getListing(res, mysql, context, req.params.lid, req.body.mid, complete);
         function complete() {
             callbackCount++;
             if (callbackCount >= 1) {
