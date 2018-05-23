@@ -1,0 +1,42 @@
+﻿
+
+<h1><a href="/">Home</a></h1>
+<h1>Update {{listing.listing_title}}:</h1>
+<form id="updatelisting" action="/listing" method="post">
+    Listing Name: <input type="text" name="listing_title" value="{{listing.listing_title}}" required><br>
+    Amount (oz): <input type="number" step=".1" min="0" name="amount" value="{{listing.amount}}" required><br>
+    Price (USD): <input type="number" step=".01" min="0" name="price" value="{{listing.price}}" required><br>
+    Dairy Free:
+    {{#if dairy_free}}
+    <input type="radio" name="dairy_free" value="TRUE" checked>Yes
+    <input type="radio" name="dairy_free" value="FALSE">No<br />
+    {{else}}
+    <input type="radio" name="dairy_free" value="TRUE">Yes
+    <input type="radio" name="dairy_free" value="FALSE" checked>No<br />
+    {{/if}}
+    Frozen:
+    {{#if frozen}}
+    <input type="radio" name="frozen" value="TRUE" checked>Yes
+    <input type="radio" name="frozen" value="FALSE">No<br />
+    {{else}}
+    <input type="radio" name="frozen" value="TRUE">Yes
+    <input type="radio" name="frozen" value="FALSE" checked>No<br />
+    {{/if}}
+    Start date: <input type="date" name="date_start"  required"><br>
+    End date: <input type="date" name="date_end"  required><br>
+    Active:
+    {{#if active}}
+    <input type="radio" name="active" value="TRUE" checked>Yes
+    <input type="radio" name="active" value="FALSE">No<br />
+    {{else}}
+    <input type="radio" name="active" value="TRUE">Yes
+    <input type="radio" name="active" value="FALSE" checked>No<br />
+    {{/if}}
+    Shop Name: {{listing.shop_name}}<br />
+    <p>
+        Note: A listing has full participation with a merchant.<br>
+        It cannot be added or removed without a merchant account.<br>
+    </p>
+</form>
+<button onclick="updateListing({{listing.id}})">Update</button>
+
