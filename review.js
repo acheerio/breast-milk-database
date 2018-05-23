@@ -72,6 +72,23 @@ module.exports = function () {
         }
     });
 	
+	/* Display one person for the specific purpose of updating people */
+    router.get('/:rid', function (req, res) {
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["../updatereview.js"];
+        var mysql = req.app.get('mysql');
+        getReview(res, mysql, context, req.params.rid, complete);
+		getListings(res, mysql, context, complete);
+		getUsers(res, mysql, context, complete);
+        function complete() {
+            callbackCount++;
+            if (callbackCount >= 3) {
+                res.render('updatereview', context);
+            }
+        }
+    });
+	
 	/* Display one review for the specific purpose of updating reviews */
     router.get('/:rid', function (req, res) {
         callbackCount = 0;
@@ -108,7 +125,7 @@ module.exports = function () {
     router.put('/:rid', function (req, res) {
         var mysql = req.app.get('mysql');
         var sql = "CALL update_review(?, ?, ?, ?, ?, ?)";
-        var inserts = [req.params.rid, req.body.rating, req.body.title, req.body.body, req.body.userFK, req.body.listingFK];
+		var inserts = [req.params.rid, req.body.rating, req.body.title, req.body.body, req.body.uid, req.body.lid];
         sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
             if (error) {
                 res.write(JSON.stringify(error));
