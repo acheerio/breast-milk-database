@@ -7,6 +7,19 @@ var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 var handlebarsintl = require('handlebars-intl');
 
+/*
+var logicHelper = handlebars.create({
+    helpers: {
+        ifEquals: function (key, value, options) {
+            if (key === value) {
+                return options.fn(this);
+            }
+            return options.inverse(this);
+        }
+    }
+});
+*/
+
 app.engine('handlebars', handlebars.engine);
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, 'public')));

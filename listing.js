@@ -3,7 +3,8 @@ module.exports = function () {
     var router = express.Router();
 		
 	/*Display all listings. Requires web based javascript to delete listings with AJAX*/
-
+	
+	/*
 	function getListings(res, mysql, context, merch_id, complete) {
 		var myquery;
 		if (merch_id == null)
@@ -27,7 +28,22 @@ module.exports = function () {
 			context.listing = results;
 			complete();
 		});
+	}*/
+	
+	function getListings(res, mysql, context, complete) {
+		mysql.pool.query('SELECT lid, listing_title, shop_name, amount, price, price_per, dairy_free, frozen,'
+        + ' date_start, date_end, post_time, active FROM `listing`'
+		+ ' INNER JOIN `merchant` ON merchFK = mid',
+		function (err, results, fields) {
+			if (err) {
+				res.write(JSON.stringify(err));
+				res.end();
+			}
+			context.listing = results;
+			complete();
+		});
 	}
+	
 	
 	function getListing(res, mysql, context, lid, complete) {
 		var sql = 'SELECT lid, listing_title, shop_name, amount, price, price_per, dairy_free, frozen,'
@@ -57,15 +73,21 @@ module.exports = function () {
             });
     }
 	
+	/* Display all listings. Requires web based javascript to delete listings with AJAX */
     router.get('/', function (req, res) {
         var callbackCount = 0;
+		/*
 		var mid = req.body.mid;
 		console.log('mid = ' + mid);
+		*/
         var context = {};
-        context.jsscripts = ["deletelisting.js"];
+        context.jsscripts = ["/deletelisting.js"];
         var mysql = req.app.get('mysql');
-        getMerchants(res, mysql, context, complete);
+		getMerchants(res, mysql, context, complete);
+		/*
 		getListings(res, mysql, context, mid, complete);
+		*/
+		getListings(res, mysql, context, complete);
         function complete() {
             callbackCount++;
             if (callbackCount >= 2) {
@@ -78,9 +100,9 @@ module.exports = function () {
     router.get('/:lid', function (req, res) {
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["../updatelisting.js"];
+        context.jsscripts = ["/updatelisting.js"];
         var mysql = req.app.get('mysql');
-        getListing(res, mysql, context, req.params.lid, req.body.mid, complete);
+        getListing(res, mysql, context, req.params.lid, complete);
         function complete() {
             callbackCount++;
             if (callbackCount >= 1) {
@@ -104,6 +126,25 @@ module.exports = function () {
             }
         });
     });
+	
+    /* The URI that update data is sent to in order to update a listing */
+
+    router.put('/:lid', function (req, res) {
+        var mysql = req.app.get('mysql');
+        var sql = "CALL update_listing(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        var inserts = [req.params.lid, req.body.listing_title, req.body.amount, req.body.price, req.body.dairy_free, req.body.frozen, req.body.date_start, req.body.date_end, req.body.active];
+        sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+            if (error) {
+                res.write(JSON.stringify(error));
+                res.end();
+            } else {
+                res.status(200);
+                res.end();
+            }
+        });
+    });
+	
+    /* Route to delete a listing, simply returns a 202 upon success. Ajax will handle this. */
 	
 	router.delete('/:lid', function (req, res) {
         var mysql = req.app.get('mysql');
