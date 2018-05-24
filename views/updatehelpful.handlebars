@@ -1,16 +1,17 @@
-﻿
+﻿<h1><a href="/">Home</a></h1>
 
-<h1><a href="/">Home</a></h1>
-<h1>Mark {{review.title}} Helpful:</h1>
-<form id="mark-helpful" action="/reviews" method="post">
-    Reviewer: <select name="user-name" id="user-selector">
+<h1>Update Helpful Reaction</h1>
+<form id="updatehelpful" action="/helpful" method="post">
+    User: <select name="uid" id="user-selector" required>
         {{#each user}}
-        <option value="{{id}}">{{fname}} {{lname}}</option>
+        <option value="{{uid}}">{{fname}} {{lname}}</option>
         {{/each}}
-    </select><br />
-    Is this review helpful?
-    <input type="radio" name="helpful" value="No" checked>No
-    <input type="radio" name="helpful" value="Yes">Yes <br />
-    </select>
+		</select>
+		<br>
+    Helpful Review: <select name="rid" id="review-selector" required>
+		{{#each review}}
+		<option value="{{rid}}">{{title}} by {{fname}} {{lname}}</option>
+		{{/each}}
+		</select>
 </form>
-<button onclick="updateReview({{review.id}})">Update</button>
+<button onclick="updateHelpful({{helpful.uid}}, {{helpful.rid}})">Update</button>

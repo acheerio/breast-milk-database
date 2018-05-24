@@ -59,7 +59,7 @@ module.exports = function () {
     router.get('/', function (req, res) {
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deletereview.js"];
+        context.jsscripts = ["/deletereview.js"];
         var mysql = req.app.get('mysql');
 		getUsers(res, mysql, context, complete);
 		getListings(res, mysql, context, complete);
@@ -76,7 +76,7 @@ module.exports = function () {
     router.get('/:rid', function (req, res) {
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["../updatereview.js"];
+        context.jsscripts = ["/updatereview.js"];
         var mysql = req.app.get('mysql');
         getReview(res, mysql, context, req.params.rid, complete);
 		getListings(res, mysql, context, complete);
@@ -90,10 +90,10 @@ module.exports = function () {
     });
 	
 	/* Display one review for the specific purpose of updating reviews */
-    router.get('/:rid', function (req, res) {
+/*    router.get('/:rid', function (req, res) {
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["../updatereview.js"];
+        context.jsscripts = ["/updatereview.js"];
         var mysql = req.app.get('mysql');
         getReview(res, mysql, context, req.params.rid, complete);
         function complete() {
@@ -102,7 +102,7 @@ module.exports = function () {
                 res.render('updatereview', context);
             }
         }
-    });
+    });*/
 	
 	/* Adds a review, redirects to the reviews page after adding */
 

@@ -4,7 +4,16 @@ var bodyParser = require('body-parser');
 var path = require('path');
 
 var app = express();
-var handlebars = require('express-handlebars').create({defaultLayout:'main'});
+var handlebars = require('express-handlebars').create({
+	defaultLayout:'main'/*,
+	helpers: {
+        select: function( value, options ){
+			var $el = $('<select />').html( options.fn(this) );
+			$el.find('[value="' + value + '"]').attr({'selected':'selected'});
+			return $el.html();
+		}
+    }*/
+});
 var handlebarsintl = require('handlebars-intl');
 
 /*
@@ -42,9 +51,10 @@ app.use('/listing', require('./listing.js'));
 
 app.use('/helpful', require('./helpful.js'));
 
+/*
 app.use('/updatemerchants', function (req, res, next) {
     res.render('updatemerchants');
-});
+});*/
 
 /*
 app.use('/listings', function (req, res, next) {
@@ -62,9 +72,12 @@ app.use('/listings', function (req, res, next) {
 });
 */
 
+/*
 app.use('/updatelistings', function (req, res, next) {
     res.render('updatelistings');
 });
+*/
+
 /*
 app.use('/reviews', function (req, res, next) {
     var context = {};
@@ -81,9 +94,9 @@ app.use('/reviews', function (req, res, next) {
 });
 */
 
-app.use('/updatereviews', function (req, res, next) {
+/*app.use('/updatereviews', function (req, res, next) {
     res.render('updatereviews');
-});
+});*/
 
 /*
 app.use('/helpful', function (req, res, next) {
@@ -102,9 +115,9 @@ app.use('/helpful', function (req, res, next) {
 });
 */
 
-app.use('/updatehelpful', function (req, res, next) {
+/*app.use('/updatehelpful', function (req, res, next) {
     res.render('updatehelpful');
-});
+});*/
 
 app.use(function(req,res){
   res.status(404);

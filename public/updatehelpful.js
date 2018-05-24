@@ -4,7 +4,7 @@ function updateHelpful(uid, rid){
         type: 'PUT',
         data: $('#updatehelpful').serialize(),
         success: function(result){
-            window.location.replace("./");
+            window.location.replace("/helpful");
         }
     })
 };
