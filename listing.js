@@ -56,9 +56,25 @@ module.exports = function () {
 				res.write(JSON.stringify(error));
 				res.end();
 			}
-			context.listing = results[0];
+			context.listing = results;
 			complete();
 		});
+    }
+
+    function filterListing(res, mysql, context, mid, complete) {
+        var sql = 'SELECT lid, listing_title, shop_name, amount, price, price_per, dairy_free, frozen,'
+            + ' date_start, date_end, post_time, active FROM `listing`'
+            + ' INNER JOIN `merchant` ON merchFK = mid'
+            + ' WHERE mid = ?';
+        var inserts = [mid];
+        mysql.pool.query(sql, inserts, function (error, results, fields) {
+            if (error) {
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.listing = results;
+            complete();
+        });
     }
 	
 	function getMerchants(res, mysql, context, complete) {
@@ -95,6 +111,22 @@ module.exports = function () {
             }
         }
     });
+
+    /* Display listings filtered by merchant */
+    router.get('/filter/:mid', function (req, res) {
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["/filterlisting.js"];
+        var mysql = req.app.get('mysql');
+        getMerchants(res, mysql, context, complete);
+        filterListing(res, mysql, context, req.params.mid, complete);
+        function complete() {
+            callbackCount++;
+            if (callbackCount >= 2) {
+                res.render('filterlisting', context);
+            }
+        }
+    });
 	
 	/* Display one listing for the specific purpose of updating listings */
     router.get('/:lid', function (req, res) {
@@ -110,7 +142,7 @@ module.exports = function () {
             }
         }
     });
-	
+    	
 	/* Adds a listing, redirects to the listings page after adding */
 	
     router.post('/', function (req, res) {

@@ -1,25 +1,4 @@
 <h1><a href="/">Home</a></h1>
-<h3>Add new Listing:</h3>
-<form id="addListing" action="/listing" method="post">
-    Listing Name: <input type="text" name="listing_title" required><br>
-    Amount (oz): <input type="number" step=".1" min="0" name="amount" required><br>
-    Price (USD): <input type="number" step=".01" min="0" name="price" required><br>
-    Dairy Free:
-    <input type="radio" name="dairy_free" value=TRUE>Yes
-    <input type="radio" name="dairy_free" value=FALSE checked>No<br />
-    Frozen:
-    <input type="radio" name="frozen" value=TRUE>Yes
-    <input type="radio" name="frozen" value=FALSE checked>No<br />
-    Start date: <input type="date" name="date_start" required><br>
-    End date: <input type="date" name="date_end" required><br>
-    Shop Name: <select name="merchFK" id="shop-selector" required>
-        {{#each merchant}}
-        <option value="{{mid}}">{{shop_name}}</option>
-        {{/each}}
-    </select><br />
-    <input type="submit" value="Submit">
-</form>
-
 
 <h3>Filter Listings:</h3>
 <table>
@@ -36,9 +15,7 @@
     </tbody>
 
 </table>
-
-
-<h3>Current Listings:</h3>
+    <br />
 
 <table>
     <thead>
@@ -74,4 +51,3 @@
         {{/each}}
     </tbody>
 </table>
-
