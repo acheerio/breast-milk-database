@@ -1,0 +1,13 @@
+<h1><a href="/">Home</a></h1>
+<h3>Mark a Review as Helpful:</h3>
+<form id="addHelpful" action="/helpful" method="post">
+    User Name: <select name="uid" id="user-selector" readyonly><br>
+        <option value="{{user.uid}}">{{user.fname}} {{user.lname}}</option>
+	</select><br>
+    Review: <select name="rid" id="review-selector" required><br>
+		{{#each unhelpful}}
+		<option value="{{rid}}">{{title}} by {{fname}} {{lname}}</option>
+		{{/each}}
+    </select><br />
+    <input type="submit" value="Submit"><button type="cancel" onclick="javascript:window.location='/';">Cancel</button>
+</form>
