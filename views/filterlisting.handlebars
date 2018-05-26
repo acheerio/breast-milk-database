@@ -1,0 +1,52 @@
+<h1><a href="/">Home</a></h1>
+
+<h3>Filter Listings:</h3>
+
+<table>
+    <thead>
+    <th>Shop Name:</th>
+    </thead>
+
+    <tbody>
+        {{#each merchant}}
+        <tr>
+            <td><a href="/listing/filter/{{mid}}">{{shop_name}}</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+
+</table>
+    <br />
+
+<table>
+    <thead>
+    <th>Listing Name</th>
+    <th>Shop Name</th>
+    <th>Amount (ounces)</th>
+    <th>Price</th>
+    <th>Price per Ounce</th>
+    <th>Dairy Free</th>
+    <th>Frozen</th>
+    <th>Milk Start Date</th>
+    <th>Milk End Date</th>
+    <th>Time of Posting</th>
+    <th>Active</th>
+    </thead>
+    <tbody>
+        {{#each listing}}
+        <tr>
+            <td>{{listing_title}}</td>
+            <td>{{shop_name}}</td>
+            <td>{{amount}}</td>
+            <td>{{price}}</td>
+            <td>{{price_per}}</td>
+            <td>{{dairy_free}}</td>
+            <td>{{frozen}}</td>
+            <td>{{date_start}}</td>
+            <td>{{date_end}}</td>
+            <td>{{post_time}}</td>
+            <td>{{active}}</td> 
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

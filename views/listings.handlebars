@@ -1,6 +1,4 @@
 <h1><a href="/">Home</a></h1>
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <h3>Add new Listing:</h3>
 <form id="addListing" action="/listing" method="post">
     Listing Name: <input type="text" name="listing_title" required><br>
@@ -22,69 +20,58 @@
     <input type="submit" value="Submit">
 </form>
 
+
+<h3>Filter Listings:</h3>
+<table>
+    <thead>
+    <th>Shop Name:</th>
+    </thead>
+
+    <tbody>
+        {{#each merchant}}
+        <tr>
+            <td><a href="/listing/filter/{{mid}}">{{shop_name}}</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+
+</table>
+
+
 <h3>Current Listings:</h3>
 
-<div id="listings">
-    <!--
-    <form id="filterListings" action="/listing" method="get">
-        Shop Name: <select name="mid" id="shop-filter" required>
-            <option value="*">All</option>
-            {{#each merchant}}
-            <option value="{{mid}}">{{shop_name}}</option>
-            {{/each}}
-        </select><br />
-        <!--   <button onclick="filterListing({{mid}})">Filter</button>  -->
-    <!--   <button class="search">Filter</button>
+<table>
+    <thead>
+    <th>Listing Name</th>
+    <th>Shop Name</th>
+    <th>Amount (ounces)</th>
+    <th>Price</th>
+    <th>Price per Ounce</th>
+    <th>Dairy Free</th>
+    <th>Frozen</th>
+    <th>Milk Start Date</th>
+    <th>Milk End Date</th>
+    <th>Time of Posting</th>
+    <th>Active</th>
+    </thead>
+    <tbody>
+        {{#each listing}}
+        <tr>
+            <td>{{listing_title}}</td>
+            <td>{{shop_name}}</td>
+            <td>{{amount}}</td>
+            <td>{{price}}</td>
+            <td>{{price_per}}</td>
+            <td>{{dairy_free}}</td>
+            <td>{{frozen}}</td>
+            <td>{{date_start}}</td>
+            <td>{{date_end}}</td>
+            <td>{{post_time}}</td>
+            <td>{{active}}</td>
+            <td><button onclick="deleteListing({{lid}})">Delete</button></td>
+            <td><a href="/listing/{{lid}}">Update</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
 
-    </form>
-    -->
-<b>Search Listings:</b> <input class="search" placeholder="Search Shop Names" />
-    <!-- <button class="sort" data-sort="shop_name">
-    Sort by name
-    </button>-->
-    <br /><br />
-
-    <table>
-        <thead>
-        <th>Listing Name</th>
-        <th>Shop Name</th>
-        <th>Amount (ounces)</th>
-        <th>Price</th>
-        <th>Price per Ounce</th>
-        <th>Dairy Free</th>
-        <th>Frozen</th>
-        <th>Milk Start Date</th>
-        <th>Milk End Date</th>
-        <th>Time of Posting</th>
-        <th>Active</th>
-        </thead>
-        <tbody class="list">
-            {{#each listing}}
-            <tr>
-                <td>{{listing_title}}</td>
-                <td class="shop_name">{{shop_name}}</td>
-                <td>{{amount}}</td>
-                <td>{{price}}</td>
-                <td>{{price_per}}</td>
-                <td>{{dairy_free}}</td>
-                <td>{{frozen}}</td>
-                <td>{{date_start}}</td>
-                <td>{{date_end}}</td>
-                <td>{{post_time}}</td>
-                <td>{{active}}</td>
-                <td><button onclick="deleteListing({{lid}})">Delete</button></td>
-                <td><a href="/listing/{{lid}}">Update</a></td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
-
-</div>
-
-<script type="text/javascript">
-    var options = {
-        valueNames: ['shop_name']
-    };
-
-    var listingsList = new List('listings', options);
-</script>
