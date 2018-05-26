@@ -48,6 +48,19 @@ module.exports = function () {
 		});
     }
 	
+	function getUser(res, mysql, context, uid, complete) {
+		var sql = 'SELECT uid, fname, lname FROM `user` WHERE uid = ?';
+		var inserts = [uid];
+		mysql.pool.query(sql, inserts, function (error, results, fields) {
+			if (error) {
+				res.write(JSON.stringify(error));
+				res.end();
+			}
+			context.user = results[0];
+			complete();
+		});
+	}
+	
 	function getUnhelpfulReviews(res, mysql, context, uid, rid, complete) {
 		var sql = 'SELECT rid, title, fname, lname FROM review' +
 		' INNER JOIN user ON uid = review.userFK' +
@@ -96,25 +109,23 @@ module.exports = function () {
     });
 	
 	/* Add a review for selected user */
-	/*router.get('/:uid', function (req, res) {
+	router.post('/add', function (req, res) {
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["/updatehelpful.js"];
 		var mysql = req.app.get('mysql');
-		context.user = {};
-		context.user.id = req.params.uid;
-        getUnhelpfulReviews(res, mysql, context, req.params.uid, -1, complete);
+		getUser(res, mysql, context, req.body.uid, complete);
+        getUnhelpfulReviews(res, mysql, context, req.body.uid, -1, complete);
         function complete() {
             callbackCount++;
-            if (callbackCount >= 1) {
+            if (callbackCount >= 2) {
                 res.render('addhelpful', context);
             }
         }
-    });*/
+    });
 	
 	/* Display one review for the specific purpose of updating reviews */
     router.get('/:uid/:rid', function (req, res) {
-        callbackCount = 0;
+		callbackCount = 0;
         var context = {};
         context.jsscripts = ["/updatehelpful.js"];
 		var mysql = req.app.get('mysql');

@@ -1,17 +1,12 @@
 <h1><a href="/">Home</a></h1>
 <h3>Mark a Review as Helpful:</h3>
-<form id="addHelpful" action="/helpful" method="post">
-    User Name: <select name="uid" id="user-selector" required><br>
+<form id="addHelpful" action="/helpful/add" method="post">
+    Select User: <select name="uid" id="user-selector" required><br>
         {{#each user}}
         <option value="{{uid}}">{{fname}} {{lname}}</option>
         {{/each}}
 	</select><br>
-    Review: <select name="rid" id="review-selector" required><br>
-		{{#each review}}
-		<option value="{{rid}}">{{title}} by {{fname}} {{lname}}</option>
-		{{/each}}
-    </select><br />
-    <input type="submit" value="Submit">
+    <input type="submit" value="Select">
 </form>
 
 <h3>Users Marked These Reviews Helpful:</h3>
