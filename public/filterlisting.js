@@ -6,5 +6,5 @@ function updateListing(mid){
         success: function(result){
             window.location.replace("./");
         }
-    })
+     })
 };
