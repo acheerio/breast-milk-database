@@ -79,30 +79,16 @@ module.exports = function () {
 		});
     }
 	
-	function getReviews(res, mysql, context, complete) {
-		var sql = 'SELECT rid, title, fname, lname FROM `review` INNER JOIN `user` ON uid = userFK';
-		mysql.pool.query(sql, function (error, results, fields) {
-			if (error) {
-				res.write(JSON.stringify(error));
-				res.end();
-			}
-			context.review = results;
-			complete();
-		});
-    }
-	
-	
     router.get('/', function (req, res) {
         var callbackCount = 0;
         var context = {};
         context.jsscripts = ["/deletehelpful.js"];
         var mysql = req.app.get('mysql');
         getUsers(res, mysql, context, complete);
-		getReviews(res, mysql, context, complete);
 		getHelpfuls(res, mysql, context, complete);
         function complete() {
             callbackCount++;
-            if (callbackCount >= 3) {
+            if (callbackCount >= 2) {
                 res.render('helpfuls', context);
             }
         }
