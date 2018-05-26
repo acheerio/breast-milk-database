@@ -48,6 +48,24 @@ module.exports = function () {
 		});
     }
 	
+	function getUnhelpfulReviews(res, mysql, context, uid, rid, complete) {
+		var sql = 'SELECT rid, title, fname, lname FROM review' +
+		' INNER JOIN user ON uid = review.userFK' +
+		' LEFT JOIN (SELECT userFK, reviewFK FROM helpful' +
+		' WHERE userFK = ? AND reviewFK != ?) as notHelpful' +
+		' ON rid = reviewFK' +
+		' WHERE notHelpful.reviewFK IS NULL';
+		var inserts = [uid, rid];
+		mysql.pool.query(sql, inserts, function (error, results, fields) {
+			if (error) {
+				res.write(JSON.stringify(error));
+				res.end();
+			}
+			context.unhelpful = results;
+			complete();
+		});
+    }
+	
 	function getReviews(res, mysql, context, complete) {
 		var sql = 'SELECT rid, title, fname, lname FROM `review` INNER JOIN `user` ON uid = userFK';
 		mysql.pool.query(sql, function (error, results, fields) {
@@ -77,18 +95,34 @@ module.exports = function () {
         }
     });
 	
+	/* Add a review for selected user */
+	/*router.get('/:uid', function (req, res) {
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["/updatehelpful.js"];
+		var mysql = req.app.get('mysql');
+		context.user = {};
+		context.user.id = req.params.uid;
+        getUnhelpfulReviews(res, mysql, context, req.params.uid, -1, complete);
+        function complete() {
+            callbackCount++;
+            if (callbackCount >= 1) {
+                res.render('addhelpful', context);
+            }
+        }
+    });*/
+	
 	/* Display one review for the specific purpose of updating reviews */
     router.get('/:uid/:rid', function (req, res) {
         callbackCount = 0;
         var context = {};
         context.jsscripts = ["/updatehelpful.js"];
 		var mysql = req.app.get('mysql');
-        getUsers(res, mysql, context, complete);
-		getReviews(res, mysql, context, complete);
+        getUnhelpfulReviews(res, mysql, context, req.params.uid, req.params.rid, complete);
 		getHelpful(res, mysql, context, req.params.uid, req.params.rid, complete);
         function complete() {
             callbackCount++;
-            if (callbackCount >= 3) {
+            if (callbackCount >= 2) {
                 res.render('updatehelpful', context);
             }
         }

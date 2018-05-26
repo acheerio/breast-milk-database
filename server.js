@@ -5,14 +5,14 @@ var path = require('path');
 
 var app = express();
 var handlebars = require('express-handlebars').create({
-	defaultLayout:'main'/*,
+	defaultLayout:'main',
 	helpers: {
         select: function( value, options ){
 			var $el = $('<select />').html( options.fn(this) );
 			$el.find('[value="' + value + '"]').attr({'selected':'selected'});
 			return $el.html();
 		}
-    }*/
+    }
 });
 var handlebarsintl = require('handlebars-intl');
 

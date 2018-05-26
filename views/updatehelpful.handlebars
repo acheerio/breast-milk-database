@@ -1,15 +1,11 @@
 ﻿<h1><a href="/">Home</a></h1>
 
-<h1>Update Helpful Reaction</h1>
+<h1>Update Review Marked Helpful</h1>
 <form id="updatehelpful" action="/helpful" method="post">
-    User: <select name="uid" id="user-selector" required>
-        {{#each user}}
-        <option value="{{uid}}">{{fname}} {{lname}}</option>
-        {{/each}}
-		</select>
+    User: {{helpful.fname}} {{helpful.lname}}
 		<br>
     Helpful Review: <select name="rid" id="review-selector" required>
-		{{#each review}}
+		{{#each unhelpful}}
 		<option value="{{rid}}">{{title}} by {{fname}} {{lname}}</option>
 		{{/each}}
 		</select>
