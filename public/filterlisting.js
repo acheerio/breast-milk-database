@@ -1,4 +1,4 @@
-function updateListing(mid){
+function filterListing(mid){
     $.ajax({
         url: '/listing/filter/' + mid,
         type: 'GET',

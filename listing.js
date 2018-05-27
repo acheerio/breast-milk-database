@@ -56,7 +56,7 @@ module.exports = function () {
 				res.write(JSON.stringify(error));
 				res.end();
 			}
-			context.listing = results;
+			context.listing = results[0];
 			complete();
 		});
     }
