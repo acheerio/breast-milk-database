@@ -14,21 +14,21 @@
     {{/if}}
     Frozen: {{frozen}}
     {{#if listing.frozen}}
-    <input type="radio" name="frozen" value="1" checked>Yes
-    <input type="radio" name="frozen" value="0">No<br />
+    <input type="radio" name="frozen" value="1" required checked>Yes
+    <input type="radio" name="frozen" value="0" required>No<br />
     {{else}}
-    <input type="radio" name="frozen" value="1">Yes
-    <input type="radio" name="frozen" value="0" checked>No<br />
+    <input type="radio" name="frozen" value="1" required>Yes
+    <input type="radio" name="frozen" value="0" required checked >No<br />
     {{/if}}
-    Start date: <input type="date" name="date_start" value="{{listing.date_start}}"><br>
-    End date: <input type="date" name="date_end" value="{{listing.date_end}}"><br>
+    Start date: <input type="date" name="date_start" value="{{listing.date_start}}" required><br>
+    End date: <input type="date" name="date_end" value="{{listing.date_end}}" required><br>
     Active:
     {{#if listing.active}}
-    <input type="radio" name="active" value="1" checked>Yes
-    <input type="radio" name="active" value="0">No<br />
+    <input type="radio" name="active" value="1" required checked>Yes
+    <input type="radio" name="active" value="0" required>No<br />
     {{else}}
-    <input type="radio" name="active" value="1">Yes
-    <input type="radio" name="active" value="0" checked>No<br />
+    <input type="radio" name="active" value="1" required>Yes
+    <input type="radio" name="active" value="0" required checked>No<br />
     {{/if}}
     Shop Name: {{listing.shop_name}}<br />
     <p>

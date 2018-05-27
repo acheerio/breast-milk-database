@@ -44,7 +44,7 @@ module.exports = function () {
     router.get('/', function (req, res) {
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deletemerchant.js"];
+        context.jsscripts = ["/deletemerchant.js"];
         var mysql = req.app.get('mysql');
         getMerchants(res, mysql, context, complete);
 		getUsers(res, mysql, context, complete);
@@ -60,7 +60,7 @@ module.exports = function () {
     router.get('/:mid', function (req, res) {
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["../updatemerchant.js"];
+        context.jsscripts = ["/updatemerchant.js"];
         var mysql = req.app.get('mysql');
         getMerchant(res, mysql, context, req.params.mid, complete);
 		getUsers(res, mysql, context, complete);

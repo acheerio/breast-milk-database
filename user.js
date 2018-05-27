@@ -33,7 +33,7 @@ module.exports = function () {
     router.get('/', function (req, res) {
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deleteuser.js"];
+        context.jsscripts = ["/deleteuser.js"];
         var mysql = req.app.get('mysql');
         getUsers(res, mysql, context, complete);
         function complete() {
@@ -48,7 +48,7 @@ module.exports = function () {
     router.get('/:uid', function (req, res) {
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["../updateuser.js"];
+        context.jsscripts = ["/updateuser.js"];
         var mysql = req.app.get('mysql');
         getUser(res, mysql, context, req.params.uid, complete);
         function complete() {

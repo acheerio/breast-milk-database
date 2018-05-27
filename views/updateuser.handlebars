@@ -1,14 +1,14 @@
 ﻿<h1><a href="/">Home</a></h1>
 <h1>Update {{user.fname}} {{user.lname}}:</h1>
 <form id="updateuser" action="/user" method="post">
-    First name: <input type="text" name="fname" value="{{user.fname}}" required><br>
-    Last name: <input type="text" name="lname" value="{{user.lname}}" required><br>
-    Email: <input type="email" name="email" value="{{user.email}}" required><br>
-    Address Line 1: <input type="text" name="add_line1" value="{{user.add_line1}}" required><br>
+    First name: <input type="text" name="fname" value="{{user.fname}}" minlength="1" required><br>
+    Last name: <input type="text" name="lname" value="{{user.lname}}" minlength="1" required><br>
+    Email: <input type="email" name="email" value="{{user.email}}" minlength="1" required><br>
+    Address Line 1: <input type="text" name="add_line1" value="{{user.add_line1}}" minlength="1" required><br>
     Address Line 2: <input type="text" name="add_line2" value="{{user.add_line2}}"><br>
-    City: <input type="text" name="city" value="{{user.city}}" required><br>
-    State: <input type="text" name="state" value="{{user.add_state}}" required><br>
-    Zip: <input type="text" name="zip" value="{{user.zip}}" required><br>
+    City: <input type="text" name="city" value="{{user.city}}" minlength="1" required><br>
+    State: <input type="text" name="state" value="{{user.add_state}}" minlength="2" maxlength="2" required><br>
+    Zip: <input type="text" name="zip" value="{{user.zip}}" minlength="5" maxlength="5" required><br>
 	Shop Name: {{user.shop_name}}<br>
 	<p>Note: A merchant account / shop name has full participation with a user.<br>
 	It cannot be added or removed without creating or deleting a merchant account.<br>

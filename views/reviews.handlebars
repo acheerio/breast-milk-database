@@ -8,9 +8,9 @@
         <option value="4">4</option>
         <option value="5">5</option>
     </select><br>
-    Review Title: <input type="text" name="title"><br>
+    Review Title: <input type="text" name="title" required><br>
     Review Body: <input type="text" name="body"><br>
-    Reviewer: <select name="userFK" id="user-selector">
+    Reviewer: <select name="userFK" id="user-selector" required>
         {{#each user}}
         <option value="{{uid}}">{{fname}} {{lname}}</option>
         {{/each}}
