@@ -7,12 +7,11 @@
     Address Line 1: <input type="text" name="add_line1" value="{{user.add_line1}}" minlength="1" required><br>
     Address Line 2: <input type="text" name="add_line2" value="{{user.add_line2}}"><br>
     City: <input type="text" name="city" value="{{user.city}}" minlength="1" required><br>
-    State: <input type="text" name="state" value="{{user.add_state}}" minlength="2" maxlength="2" required><br>
+    State: <input type="text" name="add_state" value="{{user.add_state}}" maxlength="2" required><br>
     Zip: <input type="text" name="zip" value="{{user.zip}}" minlength="5" maxlength="5" required><br>
 	Shop Name: {{user.shop_name}}<br>
-	<p>Note: A merchant account / shop name has full participation with a user.<br>
-	It cannot be added or removed without creating or deleting a merchant account.<br>
-	Please visit the Merchants page to add an account and link it to a user, or<br>
-	delete the merchant account and remove the relationship. See Piazza @195 @200.</p>
 </form>
-<button onclick="updateUser({{user.uid}})">Update</button>
+<button onclick="updateUser({{user.uid}})">Update</button><button type="cancel" onclick="javascript:window.location='./';">Cancel</button>
+<br>
+<p>To add a merchant shop to a User, go to the <a href="/merchant">Merchants page</a><br>
+and create a new Merchant.</p>

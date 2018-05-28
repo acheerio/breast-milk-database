@@ -5,7 +5,7 @@ module.exports = function () {
 	/*Display all people. Requires web based javascript to delete users with AJAX*/
 
 	function getMerchants(res, mysql, context, complete) {
-	mysql.pool.query('SELECT mid, shop_name, ave_reviews_rcvd, num_reviews_rcvd, total_listings, active_listings, fname, lname FROM `merchant` INNER JOIN `user` ON merchFK = mid',
+	mysql.pool.query('SELECT mid, shop_name, CAST(ave_reviews_rcvd AS DECIMAL(2,1)) as ave_reviews_rcvd, num_reviews_rcvd, total_listings, active_listings, fname, lname FROM `merchant` INNER JOIN `user` ON merchFK = mid',
 		function (err, results, fields) {
 			if (err) {
 				res.write(JSON.stringify(err));
@@ -17,7 +17,7 @@ module.exports = function () {
 	}
 	
 	function getMerchant(res, mysql, context, mid, complete) {
-		var sql = "SELECT mid, shop_name, ave_reviews_rcvd, num_reviews_rcvd, total_listings, active_listings, fname, lname FROM `merchant` INNER JOIN `user` ON merchFK = mid WHERE mid = ?";
+		var sql = "SELECT mid, shop_name, CAST(ave_reviews_rcvd AS DECIMAL(2,1)) as ave_reviews_rcvd, num_reviews_rcvd, total_listings, active_listings, fname, lname FROM `merchant` INNER JOIN `user` ON merchFK = mid WHERE mid = ?";
 		var inserts = [mid];
 		mysql.pool.query(sql, inserts, function (error, results, fields) {
 			if (error) {

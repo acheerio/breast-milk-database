@@ -4,7 +4,7 @@ module.exports = function () {
 
     function getUsers(res, mysql, context, complete) {
         mysql.pool.query('SELECT uid, fname, lname, email, add_line1, add_line2, city, add_state, zip, num_reviews, shop_name'
-            + ' FROM `user` LEFT JOIN `merchant` ON merchFK = mid;',
+            + ' FROM `user` LEFT JOIN `merchant` ON merchFK = mid',
             function (err, results, fields) {
                 if (err) {
                     res.write(JSON.stringify(err));
@@ -16,7 +16,8 @@ module.exports = function () {
     }
 
     function getUser(res, mysql, context, uid, complete) {
-        var sql = "SELECT uid, fname, lname, email, add_line1, add_line2, city, add_state, zip, num_reviews, shop_name FROM user LEFT JOIN `merchant` ON merchFK = mid WHERE uid = ?";
+        var sql = "SELECT uid, fname, lname, email, add_line1, add_line2, city, add_state, zip, num_reviews,"
+			+ " IFNULL(shop_name, \"None\") AS shop_name FROM user LEFT JOIN `merchant` ON merchFK = mid WHERE uid = ?";
         var inserts = [uid];
         mysql.pool.query(sql, inserts, function (error, results, fields) {
             if (error) {

@@ -17,7 +17,7 @@ module.exports = function () {
 		{	
 			myquery = 'SELECT lid, listing_title, shop_name, amount, price, price_per, dairy_free, frozen, '	
 		+ 'date_start, date_end, post_time, active FROM `listing`'	
-		+ ' INNER JOIN `merchant` ON merchFK = mid WHERE mid = ' + mid;	
+		+ ' INNER JOIN `merchant` ON merchFK = mid WHERE mid = ' + mid;
 		}	
 		mysql.pool.query(myquery,	
 		function (err, results, fields) {	

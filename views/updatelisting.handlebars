@@ -31,9 +31,10 @@
     <input type="radio" name="active" value="0" required checked>No<br />
     {{/if}}
     Shop Name: {{listing.shop_name}}<br />
-    <p>
-        Note: A listing has full participation with a merchant.<br>
-        It cannot be added without a merchant account.<br>
-    </p>
 </form>
-<button onclick="updateListing({{listing.lid}})">Update</button> 
+<button onclick="updateListing({{listing.lid}})">Update</button><button type="cancel" onclick="javascript:window.location='./';">Cancel</button>
+<br>
+<p>Note: A listing has full participation with a merchant (shop). The 1-to-M relationship<br>
+cannot be added or removed (entities cannot be associated or disassociated) independent of<br>
+creating or deleting a listing. Please visit the <a href="/listing">Listings page</a> to add a listing<br>
+and link it to a shop, or delete the listing and remove the relationship. Piazza @195 @200.</p>

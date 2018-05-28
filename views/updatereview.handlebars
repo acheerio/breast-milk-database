@@ -22,9 +22,9 @@
         {{/each}}
     </select>
 </form>
-<button onclick="updateReview({{review.rid}})">Update</button>
+<button onclick="updateReview({{review.rid}})">Update</button><button type="cancel" onclick="javascript:window.location='./';">Cancel</button>
 <br /><br />
-<p>Note: A review has full participation with a listing.<br />
-It cannot be added without creating a listing.<br />
-Please visit the Reviews page to add a review and link it to a listing, or<br />
-delete the review and remove the relationship. See Piazza @195 @200.<br /></p>
+<p>Note: A review has full participation with a user (who wrote the review) and a listing (being reviewed).<br>
+Neither 1-to-M relationship can be added or removed (entities cannot be associated or disassociated)<br>
+independent of creating or deleting a listing. Please visit the <a href="/review">Reviews page</a> to add a review<br>
+and link it to a user and listing, or delete the listing and remove the relationships. Piazza @195 @200.</p>
