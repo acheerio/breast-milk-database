@@ -2,15 +2,16 @@
 
 <h1>Update Review Marked Helpful</h1>
 <form id="updatehelpful" action="/helpful" method="post">
-    User: {{helpful.fname}} {{helpful.lname}}
-		<br>
+    User Name: <select name="uid" id="user-selector" required readyonly><br>
+        <option value="{{user.uid}}">{{user.fname}} {{user.lname}}</option>
+	</select><br>
     Helpful Review: <select name="rid" id="review-selector" required>
 		{{#each unhelpful}}
 		<option value="{{rid}}">{{title}} by {{fname}} {{lname}}</option>
 		{{/each}}
 		</select>
 </form>
-<button onclick="updateHelpful({{helpful.uid}}, {{helpful.rid}})">Update</button><button type="cancel" onclick="javascript:window.location='../';">Cancel</button>
+<button onclick="updateHelpful({{user.uid}}, {{helpful.reviewFK}})">Update</button><button type="cancel" onclick="javascript:window.location='../';">Cancel</button>
 <br>
 <p>Only the current Review or Reviews not yet marked Helpful by User<br>
 are available for selection.</p>

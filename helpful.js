@@ -116,10 +116,11 @@ module.exports = function () {
         context.jsscripts = ["/updatehelpful.js"];
 		var mysql = req.app.get('mysql');
         getUnhelpfulReviews(res, mysql, context, req.params.uid, req.params.rid, complete);
+		getUser(res, mysql, context, req.params.uid, complete);
 		getHelpful(res, mysql, context, req.params.uid, req.params.rid, complete);
         function complete() {
             callbackCount++;
-            if (callbackCount >= 2) {
+            if (callbackCount >= 3) {
                 res.render('updatehelpful', context);
             }
         }
@@ -145,10 +146,8 @@ module.exports = function () {
 
     router.put('/:uid/:rid', function (req, res) {
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE `helpful` SET userFK = ?, reviewFK = ? WHERE userFK = ? AND reviewFK = ?";
-		var inserts = [req.body.uid, req.body.rid, req.params.uid, req.params.rid];
-		console.log("req.body.uid, req.body.rid, req.params.uid, req.params.rid");
-		console.log(inserts);
+        var sql = "UPDATE `helpful` SET reviewFK = ? WHERE userFK = ? AND reviewFK = ?";
+		var inserts = [req.body.rid, req.params.uid, req.params.rid];
         sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
             if (error) {
                 res.write(JSON.stringify(error));
@@ -163,7 +162,7 @@ module.exports = function () {
 	/* Route to delete a helpful, simply returns a 202 upon success. Ajax will handle this. */
 
     router.delete('/:uid/:rid', function (req, res) {
-        var mysql = req.app.get('mysql');
+		var mysql = req.app.get('mysql');
         var sql = "DELETE FROM `helpful` WHERE userFK = ? AND reviewFK = ?";
         var inserts = [req.params.uid, req.params.rid];
         sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
