@@ -11,3 +11,10 @@
 		</select>
 </form>
 <button onclick="updateHelpful({{helpful.uid}}, {{helpful.rid}})">Update</button><button type="cancel" onclick="javascript:window.location='../';">Cancel</button>
+<br>
+<p>Only the current Review or Reviews not yet marked Helpful by User<br>
+are available for selection.</p>
+
+<script defer>
+selectDropdown("review-selector", {{helpful.reviewFK}});
+</script>

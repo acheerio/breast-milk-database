@@ -20,7 +20,7 @@ module.exports = function () {
 	}
 
 	function getHelpful(res, mysql, context, uid, rid, complete) {
-		var sql = 'SELECT marker.uid, marker.fname, marker.lname, rid, title, reviewer.fname AS rfname, reviewer.lname AS rlname '
+		var sql = 'SELECT marker.uid, marker.fname, marker.lname, reviewFK, title, reviewer.fname AS rfname, reviewer.lname AS rlname '
 					+ 'FROM `helpful` INNER JOIN `user` AS marker ON uid = userFK '
 					+ 'INNER JOIN `review` ON rid = reviewFK '
 					+ 'INNER JOIN `user` AS reviewer ON review.userFK = reviewer.uid '
