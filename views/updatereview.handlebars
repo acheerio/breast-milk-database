@@ -24,10 +24,11 @@
 </form>
 <button onclick="updateReview({{review.rid}})">Update</button><button type="cancel" onclick="javascript:window.location='./';">Cancel</button>
 <br /><br />
-<p>Note: A review has full participation with a user (who wrote the review) and a listing (being reviewed).<br>
-Neither 1-to-M relationship can be added or removed (entities cannot be associated or disassociated)<br>
-independent of creating or deleting a listing. Please visit the <a href="/review">Reviews page</a> to add a review<br>
-and link it to a user and listing, or delete the listing and remove the relationships. Piazza @195 @200.</p>
+
+<p>Note: Update existing Review to change association from one User (reviewer who wrote the review) to another,<br>
+and/or one Listing (product being reviewed) to another. This dissociates the Review from the old User and old Listing,<br>
+and associates the Review with new User / Listings. It is not possible to disassociate a Review from a User or Listing without<br>
+reassociating with new ones, because Reviews are in full participation with both entities. (See Piazza @195.)</p>
 
 <script defer>
 selectDropdown("rating-selector", {{review.rating}});
