@@ -1,7 +1,7 @@
 ﻿<h1><a href="/">Home</a></h1>
 <h1>Update {{merchant.shop_name}}:</h1>
 <form id="updatemerchant" action="/merchant" method="post">
-    Shop name: <input type="text" name="shop_name" value="{{merchant.shop_name}}" required><br>
+    Shop name: <input id="shop_name" type="text" name="shop_name" value="{{merchant.shop_name}}" required /><br>    Shop name: <input type="text" name="shop_name" value="{{merchant.shop_name}}" required><br>
 	Reviews Received: {{merchant.num_reviews_rcvd}}<br>
 	Average Rating: {{merchant.ave_reviews_rcvd}}<br>
 	Active Listings: {{merchant.active_listings}}<br>

@@ -1,14 +1,14 @@
 ﻿<h1><a href="/">Home</a></h1>
 <h1>Update {{user.fname}} {{user.lname}}:</h1>
 <form id="updateuser" action="/user" method="post">
-    First name: <input type="text" name="fname" value="{{user.fname}}" minlength="1" required><br>
-    Last name: <input type="text" name="lname" value="{{user.lname}}" minlength="1" required><br>
-    Email: <input type="email" name="email" value="{{user.email}}" minlength="1" required><br>
-    Address Line 1: <input type="text" name="add_line1" value="{{user.add_line1}}" minlength="1" required><br>
-    Address Line 2: <input type="text" name="add_line2" value="{{user.add_line2}}"><br>
-    City: <input type="text" name="city" value="{{user.city}}" minlength="1" required><br>
-    State: <input type="text" name="add_state" value="{{user.add_state}}" maxlength="2" required><br>
-    Zip: <input type="text" name="zip" value="{{user.zip}}" minlength="5" maxlength="5" required><br>
+    First name: <input id="fname" type="text" name="fname" value="{{user.fname}}" required /><br>
+    Last name: <input id="lname" type="text" name="lname" value="{{user.lname}}" required /><br>
+    Email: <input id="email" type="email" name="email" value="{{user.email}}" required /><br>
+    Address Line 1: <input id="add_line1" type="text" name="add_line1" value="{{user.add_line1}}" required /><br>
+    Address Line 2: <input id="add_line2" type="text" name="add_line2" value="{{user.add_line2}}" /><br>
+    City: <input id="city" type="text" name="city" value="{{user.city}}" required /><br>
+    State: <input id="state" type="text" name="add_state" value="{{user.add_state}}" maxlength="2" required /><br>
+    Zip: <input id="zip" type="text" name="zip" value="{{user.zip}}" minlength="5" maxlength="5" required /><br>
 	Shop Name: {{user.shop_name}}<br>
 </form>
 <button onclick="updateUser({{user.uid}})">Update</button><button type="cancel" onclick="javascript:window.location='./';">Cancel</button>
