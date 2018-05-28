@@ -42,7 +42,7 @@ module.exports = function () {
     }
 	
 	function getReview(res, mysql, context, rid, complete) {
-		var sql = 'SELECT rid, rating, title, body, fname, lname, listing_title FROM `review`'
+		var sql = 'SELECT rid, rating, title, body, fname, lname, listing_title, userFK, listingFK FROM `review`'
         + ' INNER JOIN `user` ON userFK = uid INNER JOIN `listing` ON listingFK = lid'
 		+ ' WHERE rid = ?';
 		var inserts = [rid];

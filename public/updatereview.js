@@ -8,3 +8,7 @@ function updateReview(rid){
         }
     })
 };
+
+function selectDropdown(fieldId, fieldValue) {
+	(document.getElementById(fieldId)).value = fieldValue;
+};

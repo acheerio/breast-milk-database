@@ -1,7 +1,7 @@
 ﻿<h1><a href="/">Home</a></h1>
 <h1>Update Review "{{review.title}}":</h1>
 <form id="updatereview" action="/review" method="post">
-    Rating: <select name="rating">
+    Rating: <select name="rating" id="rating-selector">
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -28,3 +28,9 @@
 Neither 1-to-M relationship can be added or removed (entities cannot be associated or disassociated)<br>
 independent of creating or deleting a listing. Please visit the <a href="/review">Reviews page</a> to add a review<br>
 and link it to a user and listing, or delete the listing and remove the relationships. Piazza @195 @200.</p>
+
+<script defer>
+selectDropdown("rating-selector", {{review.rating}});
+selectDropdown("user-selector", {{review.userFK}});
+selectDropdown("listing-selector", {{review.listingFK}});
+</script>
