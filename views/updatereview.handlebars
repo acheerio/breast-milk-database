@@ -1,36 +1,40 @@
-﻿<h1><a href="/">Home</a></h1>
-<h1>Update Review "{{review.title}}":</h1>
-<form id="updatereview" action="/review" method="post">
-    Rating: <select name="rating" id="rating-selector">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-    </select><br>
-    Review Title: <input id="title" type="text" name="title" value="{{review.title}}" /><br>
-    Review Body: <input id="body" type="text" name="body" value="{{review.body}}" /><br>
-    Reviewer: <select name="uid" id="user-selector">
-        {{#each user}}
-        <option value="{{uid}}">{{fname}} {{lname}}</option>
-        {{/each}}
-    </select><br />
-    Listing Title:
-    <select name="lid" id="listing-selector" required>
-        {{#each listing}}
-        <option value="{{lid}}">{{listing_title}}</option>
-        {{/each}}
-    </select>
-</form>
-<button onclick="updateReview({{review.rid}})">Update</button><button type="cancel" onclick="javascript:window.location='./';">Cancel</button>
-<br /><br />
-<p>Note: A review has full participation with a user (who wrote the review) and a listing (being reviewed).<br>
-Neither 1-to-M relationship can be added or removed (entities cannot be associated or disassociated)<br>
-independent of creating or deleting a listing. Please visit the <a href="/review">Reviews page</a> to add a review<br>
-and link it to a user and listing, or delete the listing and remove the relationships. Piazza @195 @200.</p>
+﻿<div class="container-fluid">
 
-<script defer>
+    <h1>Update Review "{{review.title}}":</h1>
+    <form id="updatereview" action="/review" method="post">
+        Rating: <select name="rating" id="rating-selector">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select><br>
+        Review Title: <input id="title" type="text" name="title" value="{{review.title}}" /><br>
+        Review Body: <input id="body" type="text" name="body" value="{{review.body}}" /><br>
+        Reviewer: <select name="uid" id="user-selector">
+            {{#each user}}
+            <option value="{{uid}}">{{fname}} {{lname}}</option>
+            {{/each}}
+        </select><br />
+        Listing Title:
+        <select name="lid" id="listing-selector" required>
+            {{#each listing}}
+            <option value="{{lid}}">{{listing_title}}</option>
+            {{/each}}
+        </select>
+    </form>
+    <button onclick="updateReview({{review.rid}})">Update</button><button type="cancel" onclick="javascript:window.location='./';">Cancel</button>
+    <br /><br />
+    <p>
+        Note: A review has full participation with a user (who wrote the review) and a listing (being reviewed).<br>
+        Neither 1-to-M relationship can be added or removed (entities cannot be associated or disassociated)<br>
+        independent of creating or deleting a listing. Please visit the <a href="/review">Reviews page</a> to add a review<br>
+        and link it to a user and listing, or delete the listing and remove the relationships. Piazza @195 @200.
+    </p>
+
+    <script defer>
 selectDropdown("rating-selector", {{review.rating}});
 selectDropdown("user-selector", {{review.userFK}});
 selectDropdown("listing-selector", {{review.listingFK}});
-</script>
+    </script>
+</div>

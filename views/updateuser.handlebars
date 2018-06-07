@@ -1,4 +1,5 @@
-﻿<h1><a href="/">Home</a></h1>
+﻿<div class="container-fluid">
+
 <h1>Update {{user.fname}} {{user.lname}}:</h1>
 <form id="updateuser" action="/user" method="post">
     First name: <input id="fname" type="text" name="fname" value="{{user.fname}}" required /><br>
@@ -15,3 +16,4 @@
 <br>
 <p>To add a merchant shop to a User, go to the <a href="/merchant">Merchants page</a><br>
 and create a new Merchant.</p>
+</div>

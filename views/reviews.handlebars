@@ -1,51 +1,52 @@
-<h1><a href="/">Home</a></h1>
-<h3>Add new Review:</h3>
-<form id="addReview" action="/review" method="post">
-    Rating: <select name="rating">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-    </select><br>
-    Review Title: <input type="text" name="title" required><br>
-    Review Body: <input type="text" name="body"><br>
-    Reviewer: <select name="userFK" id="user-selector" required>
-        {{#each user}}
-        <option value="{{uid}}">{{fname}} {{lname}}</option>
-        {{/each}}
-    </select><br />
-    Listing Title: <select name="listingFK" id="listing-selector">
-        {{#each listing}}
-        <option value="{{lid}}">{{listing_title}}</option>
-        {{/each}}
-    </select><br />
-    <input type="submit" value="Submit">
-</form>
+<div class="container-fluid">
 
-<h3>Current Reviews:</h3>
-<table>
-    <thead>
-    <th>Rating</th>
-    <th>Review Title</th>
-    <th>Review Body</th>
-    <th>Reviewer First Name</th>
-    <th>Reviewer Last Name</th>
-    <th>Listing Title</th>
-    </thead>
-    <tbody>
-        {{#each review}}
-        <tr>
-            <td>{{rating}}</td>
-            <td>{{title}}</td>
-            <td>{{body}}</td>
-            <td>{{fname}}</td>
-            <td>{{lname}}</td>
-            <td>{{listing_title}}</td>
-            <td><button onclick="deleteReview({{rid}})">Delete</button></td>
-            <td><a href="/review/{{rid}}">Update</a></td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-
+    <h3>Add new Review:</h3>
+    <form id="addReview" action="/review" method="post">
+        Rating: <select name="rating">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select><br>
+        Review Title: <input type="text" name="title" required><br>
+        Review Body: <input type="text" name="body"><br>
+        Reviewer: <select name="userFK" id="user-selector" required>
+            {{#each user}}
+            <option value="{{uid}}">{{fname}} {{lname}}</option>
+            {{/each}}
+        </select><br />
+        Listing Title: <select name="listingFK" id="listing-selector">
+            {{#each listing}}
+            <option value="{{lid}}">{{listing_title}}</option>
+            {{/each}}
+        </select><br />
+        <input type="submit" value="Submit">
+    </form>
+    <br />
+    <h3>Current Reviews:</h3>
+    <table id="table" class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <th>Rating</th>
+        <th>Review Title</th>
+        <th>Review Body</th>
+        <th>Reviewer First Name</th>
+        <th>Reviewer Last Name</th>
+        <th>Listing Title</th>
+        </thead>
+        <tbody>
+            {{#each review}}
+            <tr>
+                <td>{{rating}}</td>
+                <td>{{title}}</td>
+                <td>{{body}}</td>
+                <td>{{fname}}</td>
+                <td>{{lname}}</td>
+                <td>{{listing_title}}</td>
+                <td><button onclick="deleteReview({{rid}})">Delete</button></td>
+                <td><a href="/review/{{rid}}">Update</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

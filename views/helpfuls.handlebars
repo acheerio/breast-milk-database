@@ -1,35 +1,37 @@
-<h1><a href="/">Home</a></h1>
-<h3>Mark a Review as Helpful:</h3>
-<form id="addHelpful" action="/helpful/add" method="post">
-    Select User: <select name="uid" id="user-selector" required><br>
-        {{#each user}}
-        <option value="{{uid}}">{{fname}} {{lname}}</option>
-        {{/each}}
-	</select><br>
-    <input type="submit" value="Select">
-</form>
+<div class="container-fluid">
 
-<h3>Users Marked These Reviews Helpful:</h3>
-<table>
-    <thead>
-    <th>User First</th>
-    <th>User Last</th>
-    <th>Review Title</th>
-	<th>Reviewer First</th>
-	<th>Reviewer Last</th>
-    </thead>
-    <tbody>
-        {{#each helpful}}
-        <tr>
-            <td>{{fname}}</td>
-            <td>{{lname}}</td>
-            <td>{{title}}</td>
-			<td>{{rfname}}</td>
-			<td>{{rlname}}</td>
-			<td><button onclick="deleteHelpful({{uid}}, {{rid}})">Delete</button></td>
-            <td><a href="/helpful/{{uid}}/{{rid}}">Update</a></td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-
+    <h3>Mark a Review as Helpful:</h3>
+    <form id="addHelpful" action="/helpful/add" method="post">
+        Select User: <select name="uid" id="user-selector" required>
+            <br>
+            {{#each user}}
+            <option value="{{uid}}">{{fname}} {{lname}}</option>
+            {{/each}}
+        </select><br>
+        <input type="submit" value="Select">
+    </form>
+    <br />
+    <h3>Users Marked These Reviews Helpful:</h3>
+    <table id="table" class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <th>User First</th>
+        <th>User Last</th>
+        <th>Review Title</th>
+        <th>Reviewer First</th>
+        <th>Reviewer Last</th>
+        </thead>
+        <tbody>
+            {{#each helpful}}
+            <tr>
+                <td>{{fname}}</td>
+                <td>{{lname}}</td>
+                <td>{{title}}</td>
+                <td>{{rfname}}</td>
+                <td>{{rlname}}</td>
+                <td><button onclick="deleteHelpful({{uid}}, {{rid}})">Delete</button></td>
+                <td><a href="/helpful/{{uid}}/{{rid}}">Update</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
