@@ -29,14 +29,28 @@ module.exports = function () {
 		});
     }
 	
-	function getUsers(res, mysql, context, complete) {
-	mysql.pool.query('SELECT uid, fname, lname FROM `user` WHERE merchFK IS NULL',
-		function (err, results, fields) {
-			if (err) {
-				res.write(JSON.stringify(err));
+	function getUsers(res, mysql, context, mid, complete) {
+		var sql = 'SELECT uid, fname, lname FROM `user` WHERE merchFK IS NULL OR merchFK = ?';
+		var inserts = [mid];
+		mysql.pool.query(sql, inserts, function (error, results, fields) {
+			if (error) {
+				res.write(JSON.stringify(error));
 				res.end();
 			}
 			context.user = results;
+			complete();
+		});
+	}
+	
+	function getUser(res, mysql, context, mid, complete) {
+		var sql = 'SELECT uid FROM `user` WHERE merchFK = ?';
+		var inserts = [mid];
+		mysql.pool.query(sql, inserts, function (error, results, fields) {
+			if (error) {
+				res.write(JSON.stringify(error));
+				res.end();
+			}
+			context.oldUser = results[0];
 			complete();
 		});
 	}
@@ -47,7 +61,7 @@ module.exports = function () {
         context.jsscripts = ["/deletemerchant.js"];
         var mysql = req.app.get('mysql');
         getMerchants(res, mysql, context, complete);
-		getUsers(res, mysql, context, complete);
+		getUsers(res, mysql, context, -1, complete);
         function complete() {
             callbackCount++;
             if (callbackCount >= 2) {
@@ -63,10 +77,12 @@ module.exports = function () {
         context.jsscripts = ["/updatemerchant.js"];
         var mysql = req.app.get('mysql');
         getMerchant(res, mysql, context, req.params.mid, complete);
-		getUsers(res, mysql, context, complete);
+		getUsers(res, mysql, context, req.params.mid, complete);
+		getUser(res, mysql, context, req.params.mid, complete);
+		console.log(context);
         function complete() {
             callbackCount++;
-            if (callbackCount >= 2) {
+            if (callbackCount >= 3) {
                 res.render('updatemerchant', context);
             }
         }
@@ -92,8 +108,8 @@ module.exports = function () {
 
     router.put('/:mid', function (req, res) {
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE `merchant` SET shop_name = ? WHERE mid = ?";
-        var inserts = [req.body.shop_name, req.params.mid];
+        var sql = "CALL update_merchant(?, ?, ?)";
+        var inserts = [req.params.mid, req.body.shop_name, req.body.uid];
         sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
             if (error) {
                 res.write(JSON.stringify(error));

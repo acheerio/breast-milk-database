@@ -1,5 +1,4 @@
-﻿<div class="container-fluid">
-
+<div class="container-fluid">
     <h1>Update {{merchant.shop_name}}:</h1>
     <form id="updatemerchant" action="/merchant" method="post">
         Shop name: <input id="shop_name" type="text" name="shop_name" value="{{merchant.shop_name}}" required /><br>
@@ -14,4 +13,7 @@
         Note: Dependent attributes must be modified by adding/deleting the entity<br>
         in question. E.g. Add or delete reviews to modify reviews received.
     </p>
+<script defer>
+selectDropdown("user-selector", {{oldUser.uid}});
+</script>
 </div>
