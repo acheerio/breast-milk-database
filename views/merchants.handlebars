@@ -1,41 +1,42 @@
-<h1><a href="/">Home</a></h1>
-<h3>Add new Merchants:</h3>
+<div class="container-fluid">
 
-<form id="addMerchant" action="/merchant" method="post">
-    Shop Name: <input type="text" name="shop_name" required><br>
-    Available User: <select name="user" id="user-selector" required> 
-        {{#each user}}
-        <option value="{{uid}}">{{fname}} {{lname}}</option>
-        {{/each}}
-    </select><br />
-    <input type="submit" value="Submit">
-</form>
+    <h3>Add new Merchants:</h3>
 
-<h3>Current Merchants:</h3>
-<table>
-    <thead>
-    <th>Shop Name</th>
-    <th>Review Average</th>
-    <th>Reviews Received</th>
-    <th>Total Number of Listings</th>
-    <th>Number of Active Listings</th>
-	<th>User First Name</th>
-	<th>User Last Name</th>
-    </thead>
-    <tbody>
-        {{#each merchant}}
-        <tr>
-            <td>{{shop_name}}</td>
-            <td>{{ave_reviews_rcvd}}</td>
-            <td>{{num_reviews_rcvd}}</td>
-            <td>{{total_listings}}</td>
-            <td>{{active_listings}}</td>
-			<td>{{fname}}</td>
-			<td>{{lname}}</td>
-            <td><button onclick="deleteMerchant({{mid}})">Delete</button></td>
-            <td><a href="/merchant/{{mid}}">Update</a></td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-
+    <form id="addMerchant" action="/merchant" method="post">
+        Shop Name: <input type="text" name="shop_name" required><br>
+        Available User: <select name="user" id="user-selector" required>
+            {{#each user}}
+            <option value="{{uid}}">{{fname}} {{lname}}</option>
+            {{/each}}
+        </select><br />
+        <input type="submit" value="Submit">
+    </form>
+    <br />
+    <h3>Current Merchants:</h3>
+    <table id="table" class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <th>Shop Name</th>
+        <th>Review Average</th>
+        <th>Reviews Received</th>
+        <th>Total Number of Listings</th>
+        <th>Number of Active Listings</th>
+        <th>User First Name</th>
+        <th>User Last Name</th>
+        </thead>
+        <tbody>
+            {{#each merchant}}
+            <tr>
+                <td>{{shop_name}}</td>
+                <td>{{ave_reviews_rcvd}}</td>
+                <td>{{num_reviews_rcvd}}</td>
+                <td>{{total_listings}}</td>
+                <td>{{active_listings}}</td>
+                <td>{{fname}}</td>
+                <td>{{lname}}</td>
+                <td><button onclick="deleteMerchant({{mid}})">Delete</button></td>
+                <td><a href="/merchant/{{mid}}">Update</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

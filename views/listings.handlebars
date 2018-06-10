@@ -1,90 +1,91 @@
+<div class="container-fluid">
 
-<h1><a href="/">Home</a></h1>
-<h3>Add new Listing:</h3>
-<form id="addListing" action="/listing" method="post">
-    Listing Name: <input type="text" name="listing_title" required><br>
-    Amount (oz): <input type="number" step=".1" min="0" name="amount" required><br>
-    Price (USD): <input type="number" step=".01" min="0" name="price" required><br>
-    Dairy Free:
-    <input type="radio" name="dairy_free" value=TRUE>Yes
-    <input type="radio" name="dairy_free" value=FALSE checked>No<br />
-    Frozen:
-    <input type="radio" name="frozen" value=TRUE required>Yes
-    <input type="radio" name="frozen" value=FALSE checked required>No<br />
-    Start date: <input type="date" name="date_start" required><br>
-    End date: <input type="date" name="date_end" required><br>
-    Shop Name: <select name="merchFK" id="shop-selector" required>
-        {{#each merchant}}
-        <option value="{{mid}}">{{shop_name}}</option>
-        {{/each}}
-    </select><br />
-    <input type="submit" value="Submit">
-</form>
+    <h3>Add new Listing:</h3>
+    <form id="addListing" action="/listing" method="post">
+        Listing Name: <input type="text" name="listing_title" required><br>
+        Amount (oz): <input type="number" step=".1" min="0" name="amount" required><br>
+        Price (USD): <input type="number" step=".01" min="0" name="price" required><br>
+        Dairy Free:
+        <input type="radio" name="dairy_free" value=TRUE>Yes
+        <input type="radio" name="dairy_free" value=FALSE checked>No<br />
+        Frozen:
+        <input type="radio" name="frozen" value=TRUE required>Yes
+        <input type="radio" name="frozen" value=FALSE checked required>No<br />
+        Start date: <input type="date" name="date_start" required><br>
+        End date: <input type="date" name="date_end" required><br>
+        Shop Name: <select name="merchFK" id="shop-selector" required>
+            {{#each merchant}}
+            <option value="{{mid}}">{{shop_name}}</option>
+            {{/each}}
+        </select><br />
+        <input type="submit" value="Submit">
+    </form>
+    <br />
 
+    <h3>Filter Listings:</h3>
+    <table id="table" class="table table-striped table-responsive">
+        <thead class="thead-dark">
+        <th>By Shop Name:</th>
+        </thead>
 
-<h3>Filter Listings:</h3>
-<table>
-    <thead>
-    <th>By Shop Name:</th>
-    </thead>
+        <tbody>
+            {{#each merchant}}
+            <tr>
+                <td><a href="/listing/filter/{{mid}}">{{shop_name}}</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
 
-    <tbody>
-        {{#each merchant}}
-        <tr>
-            <td><a href="/listing/filter/{{mid}}">{{shop_name}}</a></td>
-        </tr>
-        {{/each}}
-    </tbody>
+    </table>
 
-</table>
+    <br />
 
+    <h3>Current Listings:</h3>
 
-<h3>Current Listings:</h3>
-
-<table>
-    <thead>
-    <th>Listing Name</th>
-    <th>Shop Name</th>
-    <th>Amount (oz)</th>
-    <th>Price (USD)</th>
-    <th>Price per<br>Oz. (USD)</th>
-    <th>Dairy Free</th>
-    <th>Frozen</th>
-    <th>Milk Start Date</th>
-    <th>Milk End Date</th>
-    <th>Time of Posting</th>
-    <th>Active</th>
-    </thead>
-    <tbody>
-        {{#each listing}}
-        <tr>
-            <td>{{listing_title}}</td>
-            <td>{{shop_name}}</td>
-            <td>{{amount}}</td>
-            <td>{{price}}</td>
-            <td>{{price_per}}</td>
-            {{#if dairy_free}}
-				<td>Yes</td>
-			{{else}}
-				<td>No</td>
-			{{/if}}
-			{{#if frozen}}
-				<td>Yes</td>
-			{{else}}
-				<td>No</td>
-			{{/if}}
-            <td>{{date_start}}</td>
-            <td>{{date_end}}</td>
-            <td>{{post_time}}</td>
-			{{#if active}}
-				<td>Yes</td>
-			{{else}}
-				<td>No</td>
-			{{/if}}
-            <td><button onclick="deleteListing({{lid}})">Delete</button></td>
-            <td><a href="/listing/{{lid}}">Update</a></td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-
+    <table id="table" class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <th>Listing Name</th>
+        <th>Shop Name</th>
+        <th>Amount (oz)</th>
+        <th>Price (USD)</th>
+        <th>Price per<br>Oz. (USD)</th>
+        <th>Dairy Free</th>
+        <th>Frozen</th>
+        <th>Milk Start Date</th>
+        <th>Milk End Date</th>
+        <th>Time of Posting</th>
+        <th>Active</th>
+        </thead>
+        <tbody>
+            {{#each listing}}
+            <tr>
+                <td>{{listing_title}}</td>
+                <td>{{shop_name}}</td>
+                <td>{{amount}}</td>
+                <td>{{price}}</td>
+                <td>{{price_per}}</td>
+                {{#if dairy_free}}
+                <td>Yes</td>
+                {{else}}
+                <td>No</td>
+                {{/if}}
+                {{#if frozen}}
+                <td>Yes</td>
+                {{else}}
+                <td>No</td>
+                {{/if}}
+                <td>{{date_start}}</td>
+                <td>{{date_end}}</td>
+                <td>{{post_time}}</td>
+                {{#if active}}
+                <td>Yes</td>
+                {{else}}
+                <td>No</td>
+                {{/if}}
+                <td><button onclick="deleteListing({{lid}})">Delete</button></td>
+                <td><a href="/listing/{{lid}}">Update</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

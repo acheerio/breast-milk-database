@@ -1,22 +1,19 @@
-﻿<h1><a href="/">Home</a></h1>
-<h1>Update {{merchant.shop_name}}:</h1>
-<form id="updatemerchant" action="/merchant" method="post">
-    Shop Name: <input id="shop_name" type="text" name="shop_name" value="{{merchant.shop_name}}" required /><br>
-	Reviews Received: {{merchant.num_reviews_rcvd}}<br>
-	Average Rating: {{merchant.ave_reviews_rcvd}}<br>
-	Active Listings: {{merchant.active_listings}}<br>
-	Total Listings: {{merchant.total_listings}}<br>
-	User Name: <select name="uid" id="user-selector" required>
-        {{#each user}}
-        <option value="{{uid}}">{{fname}} {{lname}}</option>
-        {{/each}}
-    </select>
-</form>
-<button onclick="updateMerchant({{merchant.mid}})">Update</button><button type="cancel" onclick="javascript:window.location='./';">Cancel</button>
-<br>
-<p>Note: Dependent attributes must be modified by adding/deleting the entity<br>
-in question. E.g. Add or delete reviews to modify reviews received.</p>
-
+<div class="container-fluid">
+    <h1>Update {{merchant.shop_name}}:</h1>
+    <form id="updatemerchant" action="/merchant" method="post">
+        Shop name: <input id="shop_name" type="text" name="shop_name" value="{{merchant.shop_name}}" required /><br>
+        Reviews Received: {{merchant.num_reviews_rcvd}}<br>
+        Average Rating: {{merchant.ave_reviews_rcvd}}<br>
+        Active Listings: {{merchant.active_listings}}<br>
+        Total Listings: {{merchant.total_listings}}<br>
+    </form>
+    <button onclick="updateMerchant({{merchant.mid}})">Update</button><button type="cancel" onclick="javascript:window.location='./';">Cancel</button>
+    <br>
+    <p>
+        Note: Dependent attributes must be modified by adding/deleting the entity<br>
+        in question. E.g. Add or delete reviews to modify reviews received.
+    </p>
 <script defer>
 selectDropdown("user-selector", {{oldUser.uid}});
 </script>
+</div>
